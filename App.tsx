@@ -12,6 +12,7 @@ import theme from "./src/theme";
 
 import { Loading } from "@components/Loading";
 import { Login } from "@screens/Login";
+import { SignUp } from "@screens/SignUp";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -28,7 +29,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded ? <Login /> : <Loading />}
+      {fontsLoaded ? <SignUp /> : <Loading />}
     </ThemeProvider>
   );
 }

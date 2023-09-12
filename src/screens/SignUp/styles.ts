@@ -12,7 +12,7 @@ export const ContentHeader = styled.View`
 `;
 
 export const ContentInputs = styled.View`
-  height: 136px;
+  height: 208px;
   justify-content: space-between;
   margin-left: 16px;
   margin-right: 16px;
@@ -24,7 +24,7 @@ export const ContentButtons = styled.View`
   justify-content: space-between;
   margin-left: 16px;
   margin-right: 16px;
-  margin-bottom: 98px;
+  margin-bottom: 63px;
 `;
 
 export const ContentFooter = styled.View`
@@ -33,7 +33,7 @@ export const ContentFooter = styled.View`
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 98px;
+  margin-top: 63px;
 `;
 
 export const ContentFooterButtons = styled.View`
