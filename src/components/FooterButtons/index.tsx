@@ -1,4 +1,3 @@
-import { TouchableOpacityProps } from "react-native";
 import { ContainerIcon, Icon } from "./styles";
 
 import { FontAwesome5 } from "@expo/vector-icons";

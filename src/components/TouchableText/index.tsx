@@ -2,14 +2,16 @@ import React from "react";
 import { Container, Box, Content, Icon } from "./styles";
 
 type Props = {
+  icon?: boolean;
   label: string;
+  onPress?: () => void;
 };
-export function TouchableText({ label }: Props) {
+export function TouchableText({ label, icon = false, onPress }: Props) {
   return (
-    <Container>
+    <Container onPress={onPress}>
       <Box>
         <Content>{label}</Content>
-        <Icon />
+        {icon && <Icon />}
       </Box>
     </Container>
   );

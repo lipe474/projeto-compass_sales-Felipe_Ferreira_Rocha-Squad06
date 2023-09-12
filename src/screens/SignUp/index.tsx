@@ -1,4 +1,4 @@
-import { Header } from "@components/Header";
+import React from "react";
 import {
   Container,
   ContentButtons,
@@ -8,16 +8,28 @@ import {
   ContentInputs,
   Title
 } from "./styles";
+
+import { useNavigation } from "@react-navigation/native";
+
+import { AuthNavigatorRoutesProps } from "@routes/auth.routes";
+
 import { CustomInput } from "@components/Input";
 import { TouchableText } from "@components/TouchableText";
 import { CustomButton } from "@components/Button";
 import { FooterButtons } from "@components/FooterButtons";
+import { Header } from "@components/Header";
 
 export function SignUp() {
+  const navigation = useNavigation<AuthNavigatorRoutesProps>();
+
+  function handleGoBack() {
+    navigation.goBack();
+  }
+
   return (
     <Container>
       <ContentHeader>
-        <Header title="Sign up" showBackButton />
+        <Header title="Sign up" showBackButton onPress={handleGoBack} />
       </ContentHeader>
       <ContentInputs>
         <CustomInput

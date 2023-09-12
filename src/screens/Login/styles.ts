@@ -20,11 +20,24 @@ export const ContentInputs = styled.View`
 `;
 
 export const ContentButtons = styled.View`
-  height: 100px;
-  justify-content: space-between;
+  height: 130px;
   margin-left: 16px;
   margin-right: 16px;
-  margin-bottom: 98px;
+  margin-bottom: 68px;
+`;
+
+export const ContentButtonLogin = styled.View`
+  height: 100px;
+  justify-content: space-between;
+`;
+
+export const ContentRegister = styled.View`
+  height: 20px;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  flex-direction: row;
 `;
 
 export const ContentFooter = styled.View`
@@ -41,11 +54,11 @@ export const ContentFooterButtons = styled.View`
   justify-content: space-between;
   align-items: center;
   width: 200px;
+  margin-top: 12px;
 `;
 
 export const Title = styled.Text`
   font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
   color: ${({ theme }) => theme.COLORS.BLACK_700};
-  margin-bottom: 12px;
 `;
