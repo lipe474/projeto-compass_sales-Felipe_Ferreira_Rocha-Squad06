@@ -9,7 +9,6 @@ export const Box = styled.View`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  margin-top: 8px;
 `;
 
 export const Content = styled.Text`

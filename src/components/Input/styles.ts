@@ -35,7 +35,7 @@ export const InputContainer = styled(Hoshi).attrs(({ theme }) => ({
 
   border-radius: 6px;
 
-  margin-bottom: 8px;
+  elevation: 1;
 `;
 
 export const SuccessIcon = styled(Check).attrs(({ theme }) => ({
