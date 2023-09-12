@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components/native";
+import styled from "styled-components/native";
 import { CaretLeft } from "phosphor-react-native";
 
 export const Container = styled.View`
@@ -32,5 +32,6 @@ export const Spacer = styled.View`
 
 export const BackIcon = styled(CaretLeft).attrs(({ theme }) => ({
   size: theme.FONT_SIZE.LG,
-  color: theme.COLORS.BLACK_700
+  color: theme.COLORS.BLACK_700,
+  weight: "bold"
 }))``;

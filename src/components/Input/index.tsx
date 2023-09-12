@@ -1,10 +1,10 @@
+import React, { useState } from "react";
 import { TextInputProps } from "react-native";
 import { useTheme } from "styled-components/native";
 
-import { Container, SuccessIcon, InputContainer } from "./styles";
-
 import { HoshiProps } from "react-native-textinput-effects";
-import { useState } from "react";
+
+import { Container, SuccessIcon, InputContainer } from "./styles";
 
 type Props = TextInputProps &
   HoshiProps & {

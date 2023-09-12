@@ -1,3 +1,4 @@
+import React from "react";
 import { BackButton, BackIcon, Container, Spacer, Title } from "./styles";
 
 type Props = {
