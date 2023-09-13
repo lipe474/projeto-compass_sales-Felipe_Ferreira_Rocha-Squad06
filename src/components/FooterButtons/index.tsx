@@ -1,15 +1,17 @@
-import { ContainerIcon, Icon } from "./styles";
+import { ImageSourcePropType } from "react-native";
+import { ContainerIcon, IconImage } from "./styles";
 
 import { FontAwesome5 } from "@expo/vector-icons";
 
 type Props = {
-  icon: keyof typeof FontAwesome5.glyphMap;
+  source: ImageSourcePropType;
 };
 
-export function FooterButtons({ icon }: Props) {
+export function FooterButtons({ source }: Props) {
   return (
     <ContainerIcon>
-      <Icon name={icon} />
+      <IconImage source={source} />
+      {/* <Icon name={icon} /> */}
     </ContainerIcon>
   );
 }

@@ -19,11 +19,18 @@ import { CustomButton } from "@components/Button";
 import { FooterButtons } from "@components/FooterButtons";
 import { Header } from "@components/Header";
 
+import { auth } from "@services/FirebaseConfig";
+
 export function SignUp() {
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
 
   function handleGoBack() {
     navigation.goBack();
+  }
+
+  function handleCreateAccount() {
+    try {
+    } catch (error) {}
   }
 
   return (
@@ -46,14 +53,14 @@ export function SignUp() {
         <CustomInput label="Password" secureTextEntry={true} />
       </ContentInputs>
       <ContentButtons>
-        <TouchableText label="Already have an account?" />
+        <TouchableText label="Already have an account?" icon />
         <CustomButton title="SIGN UP" />
       </ContentButtons>
       <ContentFooter>
         <Title>Or sign up with social account</Title>
         <ContentFooterButtons>
-          <FooterButtons icon="google" />
-          <FooterButtons icon="facebook" />
+          <FooterButtons source={require("@assets/google.png")} />
+          <FooterButtons source={require("@assets/facebook.png")} />
         </ContentFooterButtons>
       </ContentFooter>
     </Container>

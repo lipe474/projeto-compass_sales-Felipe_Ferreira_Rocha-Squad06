@@ -12,12 +12,6 @@ import { useNavigation } from "@react-navigation/native";
 
 import { AuthNavigatorRoutesProps } from "@routes/auth.routes";
 
-import { auth } from "@services/FirebaseConfig";
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
-} from "firebase/auth";
-
 import {
   Container,
   ContentHeader,
@@ -29,6 +23,7 @@ import {
   ContentRegister,
   ContentButtonLogin
 } from "./styles";
+import { LoginUser } from "@requests/index";
 
 type FormData = {
   email: string;
@@ -43,6 +38,7 @@ export function Login() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm<FormData>();
 
@@ -50,8 +46,10 @@ export function Login() {
     try {
       setIsLoading(true);
 
-      const response = await signInWithEmailAndPassword(auth, email, password);
+      const response = await LoginUser(email, password);
       // const response = await createUserWithEmailAndPassword(auth, email, password);
+
+      reset({ email: "", password: "" });
 
       console.log(response);
     } catch (error) {
@@ -80,11 +78,13 @@ export function Login() {
           control={control}
           name="email"
           rules={{ required: "Informe o e-mail" }}
-          render={({ field: { onChange } }) => (
+          render={({ field: { onChange, value } }) => (
             <CustomInput
               label="Email"
               keyboardType="email-address"
               autoCapitalize="none"
+              returnKeyType="done"
+              value={value}
               onChangeText={onChange}
               errorMessage={errors.email?.message}
             />
@@ -95,10 +95,12 @@ export function Login() {
           control={control}
           name="password"
           rules={{ required: "Informe a senha" }}
-          render={({ field: { onChange } }) => (
+          render={({ field: { onChange, value } }) => (
             <CustomInput
               label="Password"
               secureTextEntry
+              returnKeyType="send"
+              value={value}
               onChangeText={onChange}
               errorMessage={errors.password?.message}
             />
@@ -133,8 +135,8 @@ export function Login() {
         <Title>Or login with social account</Title>
 
         <ContentFooterButtons>
-          <FooterButtons icon="google" />
-          <FooterButtons icon="facebook" />
+          <FooterButtons source={require("@assets/google.png")} />
+          <FooterButtons source={require("@assets/facebook.png")} />
         </ContentFooterButtons>
       </ContentFooter>
     </Container>

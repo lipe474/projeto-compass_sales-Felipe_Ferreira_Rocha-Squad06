@@ -14,6 +14,11 @@ export const ContainerIcon = styled(TouchableOpacity)`
   elevation: 1;
 `;
 
+export const IconImage = styled.Image`
+  width: 24px;
+  height: 24px;
+`;
+
 export const Icon = styled(FontAwesome5).attrs(({ theme }) => ({
   size: 24,
   color: theme.COLORS.BLACK_700
