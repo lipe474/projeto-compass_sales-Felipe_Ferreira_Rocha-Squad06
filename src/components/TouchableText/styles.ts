@@ -21,5 +21,6 @@ export const Content = styled.Text`
 
 export const Icon = styled(ArrowRight).attrs(({ theme }) => ({
   size: theme.FONT_SIZE.LG,
-  color: theme.COLORS.RED_200
+  color: theme.COLORS.RED_200,
+  weight: "bold"
 }))``;

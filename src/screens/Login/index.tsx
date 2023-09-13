@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { Controller, useForm } from "react-hook-form";
 
 import { Header } from "@components/Header";
 import { CustomInput } from "@components/Input";
 import { CustomButton } from "@components/Button";
 import { TouchableText } from "@components/TouchableText";
+import { FooterButtons } from "@components/FooterButtons";
 
 import { useNavigation } from "@react-navigation/native";
 
 import { AuthNavigatorRoutesProps } from "@routes/auth.routes";
+
+import { auth } from "@services/FirebaseConfig";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
+} from "firebase/auth";
 
 import {
   Container,
@@ -20,10 +29,37 @@ import {
   ContentRegister,
   ContentButtonLogin
 } from "./styles";
-import { FooterButtons } from "@components/FooterButtons";
+
+type FormData = {
+  email: string;
+  password: string;
+};
 
 export function Login() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormData>();
+
+  async function handleLogin({ email, password }: FormData) {
+    try {
+      setIsLoading(true);
+
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      // const response = await createUserWithEmailAndPassword(auth, email, password);
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   function handleForgotPassword() {
     console.log("Forgot password");
@@ -40,8 +76,34 @@ export function Login() {
       </ContentHeader>
 
       <ContentInputs>
-        <CustomInput label="Email" keyboardType="email-address" showIcon />
-        <CustomInput label="Password" secureTextEntry={true} />
+        <Controller
+          control={control}
+          name="email"
+          rules={{ required: "Informe o e-mail" }}
+          render={({ field: { onChange } }) => (
+            <CustomInput
+              label="Email"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              onChangeText={onChange}
+              errorMessage={errors.email?.message}
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="password"
+          rules={{ required: "Informe a senha" }}
+          render={({ field: { onChange } }) => (
+            <CustomInput
+              label="Password"
+              secureTextEntry
+              onChangeText={onChange}
+              errorMessage={errors.password?.message}
+            />
+          )}
+        />
       </ContentInputs>
 
       <ContentButtons>
@@ -51,7 +113,11 @@ export function Login() {
             icon
             onPress={handleForgotPassword}
           />
-          <CustomButton title="LOGIN" />
+          <CustomButton
+            title="LOGIN"
+            onPress={handleSubmit(handleLogin)}
+            isLoading={isLoading}
+          />
         </ContentButtonLogin>
 
         <ContentRegister>

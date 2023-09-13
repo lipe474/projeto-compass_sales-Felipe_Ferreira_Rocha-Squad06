@@ -10,6 +10,7 @@ type Props = TextInputProps &
   HoshiProps & {
     label: string;
     showIcon?: boolean;
+    errorMessage?: string | null;
   };
 
 export function CustomInput({ label, showIcon, ...rest }: Props) {
@@ -41,7 +42,6 @@ export function CustomInput({ label, showIcon, ...rest }: Props) {
     <Container>
       <InputContainer
         label={label}
-        value={inputValue}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChangeText={handleChangeText}

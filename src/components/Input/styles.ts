@@ -1,6 +1,5 @@
 import { Check } from "phosphor-react-native";
-import { TextInput } from "react-native";
-import styled, { css } from "styled-components/native";
+import styled from "styled-components/native";
 import { Hoshi } from "react-native-textinput-effects";
 
 export const Container = styled.View`
