@@ -4,14 +4,20 @@ import { useTheme } from "styled-components/native";
 
 import { HoshiProps } from "react-native-textinput-effects";
 
-import { Container, SuccessIcon, InputContainer } from "./styles";
-import { set } from "react-hook-form";
+import {
+  Container,
+  SuccessIcon,
+  InputContainer,
+  ErrorText,
+  ErrorIcon
+} from "./styles";
 
 type Props = TextInputProps &
   HoshiProps & {
     label: string;
     showIcon?: boolean;
     errorMessage?: string | null;
+    formSubmitted?: boolean;
   };
 
 export function CustomInput({
@@ -19,6 +25,8 @@ export function CustomInput({
   showIcon,
   onChangeText,
   value,
+  errorMessage,
+  formSubmitted,
   ...rest
 }: Props) {
   const { FONT_SIZE, FONT_FAMILY } = useTheme();
@@ -26,14 +34,6 @@ export function CustomInput({
   const [isFocused, setIsFocused] = useState(false);
 
   const hasValue = value && value.trim() !== "";
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
 
   const labelStyle = {
     fontSize: isFocused || hasValue ? FONT_SIZE.XS : FONT_SIZE.SM,
@@ -43,17 +43,39 @@ export function CustomInput({
   };
 
   return (
-    <Container>
-      <InputContainer
-        label={label}
-        labelStyle={labelStyle}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        onChangeText={onChangeText}
-        value={value}
-        {...rest}
-      />
-      {showIcon && <SuccessIcon />}
-    </Container>
+    <>
+      <Container>
+        {errorMessage ? (
+          <InputContainer
+            label={label}
+            labelStyle={labelStyle}
+            style={{
+              borderColor: "red"
+            }}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            onChangeText={onChangeText}
+            value={value}
+            {...rest}
+          />
+        ) : (
+          <InputContainer
+            label={label}
+            labelStyle={labelStyle}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            onChangeText={onChangeText}
+            value={value}
+            {...rest}
+          />
+        )}
+        {formSubmitted && !errorMessage && hasValue && showIcon ? (
+          <SuccessIcon />
+        ) : (
+          errorMessage && showIcon && <ErrorIcon />
+        )}
+      </Container>
+      {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
+    </>
   );
 }

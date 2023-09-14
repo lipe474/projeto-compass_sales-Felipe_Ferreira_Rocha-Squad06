@@ -9,6 +9,7 @@ type Props = TouchableOpacityProps & {
 };
 export function CustomButton({ title, isLoading = false, ...rest }: Props) {
   const { COLORS } = useTheme();
+
   return (
     <>
       {isLoading ? (

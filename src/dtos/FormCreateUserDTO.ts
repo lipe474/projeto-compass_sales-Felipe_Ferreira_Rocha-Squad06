@@ -1,6 +1,6 @@
-export type UserDTO = {
-  uid?: string;
+export type FormCreateUserDTO = {
   displayName: string;
   email: string;
   password: string;
+  password_confirm: string;
 };

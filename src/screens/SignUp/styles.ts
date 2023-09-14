@@ -12,11 +12,12 @@ export const ContentHeader = styled.View`
 `;
 
 export const ContentInputs = styled.View`
-  height: 208px;
+  min-height: 280px;
+  max-height: 350px;
   justify-content: space-between;
   margin-left: 16px;
   margin-right: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 `;
 
 export const ContentButtons = styled.View`
@@ -24,16 +25,17 @@ export const ContentButtons = styled.View`
   justify-content: space-between;
   margin-left: 16px;
   margin-right: 16px;
-  margin-bottom: 63px;
 `;
 
 export const ContentFooter = styled.View`
   height: 96px;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 63px;
+  margin-bottom: 24px;
+  position: fixed;
+  flex: 1;
 `;
 
 export const ContentFooterButtons = styled.View`

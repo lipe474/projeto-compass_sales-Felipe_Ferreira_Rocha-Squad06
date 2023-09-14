@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile
 } from "firebase/auth";
 import { auth } from "@services/FirebaseConfig";
@@ -9,19 +10,19 @@ import { AppError } from "@utils/AppError";
 
 export async function CreateUser({ displayName, email, password }: UserDTO) {
   try {
-    if (!email && !password) {
-      throw new AppError("Email and password are required");
-    }
+    const response = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-    const user = await createUserWithEmailAndPassword(auth, email, password);
-
-    if (user && auth.currentUser) {
-      updateProfile(auth.currentUser, {
+    if (response.user && auth.currentUser) {
+      await updateProfile(auth.currentUser, {
         displayName: displayName
       });
     }
 
-    return user;
+    return response;
   } catch (error: any) {
     throw new AppError(error.message);
   }

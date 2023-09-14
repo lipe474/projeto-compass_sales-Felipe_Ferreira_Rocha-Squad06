@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import Toast from "react-native-root-toast";
+
 import { Controller, useForm } from "react-hook-form";
 
 import { Header } from "@components/Header";
@@ -8,9 +10,11 @@ import { CustomButton } from "@components/Button";
 import { TouchableText } from "@components/TouchableText";
 import { FooterButtons } from "@components/FooterButtons";
 
+import { useTheme } from "styled-components/native";
+
 import { useNavigation } from "@react-navigation/native";
 
-import { AuthNavigatorRoutesProps } from "@routes/auth.routes";
+import { AuthProps } from "@routes/auth.routes";
 
 import {
   Container,
@@ -24,36 +28,40 @@ import {
   ContentButtonLogin
 } from "./styles";
 import { LoginUser } from "@requests/index";
-
-type FormData = {
-  email: string;
-  password: string;
-};
+import { FormLoginDTO } from "@dtos/FormLoginDTO";
 
 export function Login() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const navigation = useNavigation<AuthNavigatorRoutesProps>();
+  const navigation = useNavigation<AuthProps>();
+  const { COLORS } = useTheme();
 
   const {
     control,
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm<FormData>();
+  } = useForm<FormLoginDTO>();
 
-  async function handleLogin({ email, password }: FormData) {
+  async function handleLogin({ email, password }: FormLoginDTO) {
     try {
       setIsLoading(true);
 
-      const response = await LoginUser(email, password);
-      // const response = await createUserWithEmailAndPassword(auth, email, password);
+      await LoginUser(email, password);
 
       reset({ email: "", password: "" });
+    } catch (error: any) {
+      const message =
+        "Erro ao fazer login, verifique seu e-mail e senha." || error.message;
 
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+      setIsLoading(false);
+
+      Toast.show(message, {
+        duration: 3000,
+        position: 30,
+        backgroundColor: COLORS.RED_200,
+        textColor: COLORS.WHITE
+      });
     } finally {
       setIsLoading(false);
     }
@@ -65,6 +73,7 @@ export function Login() {
 
   function handleCreateAccount() {
     navigation.navigate("signUp");
+    reset({ email: "", password: "" });
   }
 
   return (
@@ -114,6 +123,7 @@ export function Login() {
             label="Forgot your password?"
             icon
             onPress={handleForgotPassword}
+            source={require("@assets/arrow-right.png")}
           />
           <CustomButton
             title="LOGIN"

@@ -16,7 +16,7 @@ export const ContentInputs = styled.View`
   justify-content: space-between;
   margin-left: 16px;
   margin-right: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 `;
 
 export const ContentButtons = styled.View`
@@ -46,7 +46,7 @@ export const ContentFooter = styled.View`
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 98px;
+  margin-top: 116px;
 `;
 
 export const ContentFooterButtons = styled.View`

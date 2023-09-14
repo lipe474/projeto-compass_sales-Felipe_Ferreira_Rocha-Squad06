@@ -19,8 +19,13 @@ export const Content = styled.Text`
   margin-right: 3px;
 `;
 
-export const Icon = styled(ArrowRight).attrs(({ theme }) => ({
-  size: theme.FONT_SIZE.LG,
-  color: theme.COLORS.RED_200,
-  weight: "bold"
-}))``;
+export const Icon = styled.Image`
+  width: 24px;
+  height: 24px;
+`;
+
+// export const Icon = styled(ArrowRight).attrs(({ theme }) => ({
+//   size: theme.FONT_SIZE.LG,
+//   color: theme.COLORS.RED_200,
+//   weight: "bold"
+// }))``;

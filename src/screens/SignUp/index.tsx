@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   ContentButtons,
@@ -11,7 +11,12 @@ import {
 
 import { useNavigation } from "@react-navigation/native";
 
-import { AuthNavigatorRoutesProps } from "@routes/auth.routes";
+import { AuthProps } from "@routes/auth.routes";
+
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { signUpSchema } from "@utils/validation/schemaCreateUser";
+import { CreateUser } from "@requests/index";
 
 import { CustomInput } from "@components/Input";
 import { TouchableText } from "@components/TouchableText";
@@ -19,18 +24,69 @@ import { CustomButton } from "@components/Button";
 import { FooterButtons } from "@components/FooterButtons";
 import { Header } from "@components/Header";
 
+import { FormCreateUserDTO } from "@dtos/FormCreateUserDTO";
+import { UserDTO } from "@dtos/UserDTO";
+
+import Toast from "react-native-root-toast";
+
+import { useTheme } from "styled-components/native";
+import { updateCurrentUser, updateProfile } from "firebase/auth";
 import { auth } from "@services/FirebaseConfig";
 
 export function SignUp() {
-  const navigation = useNavigation<AuthNavigatorRoutesProps>();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
+
+  const navigation = useNavigation<AuthProps>();
+  const { COLORS } = useTheme();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormCreateUserDTO>({
+    resolver: yupResolver(signUpSchema)
+  });
 
   function handleGoBack() {
     navigation.goBack();
   }
 
-  function handleCreateAccount() {
+  async function handleCreateAccount({
+    displayName,
+    email,
+    password
+  }: UserDTO) {
     try {
-    } catch (error) {}
+      setIsLoading(true);
+      await CreateUser({ displayName, email, password });
+
+      Toast.show("Usuário criado com sucesso.", {
+        duration: 3000,
+        position: 30,
+        backgroundColor: COLORS.GREEN,
+        textColor: COLORS.WHITE
+      });
+
+      navigation.navigate("login");
+      setIsSubmitSuccessful(true);
+      setIsLoading(false);
+    } catch (error: any) {
+      const message =
+        "Erro ao criar conta, verifique os campos de email e senha e tente novamente." ||
+        error.message;
+
+      setIsLoading(false);
+
+      Toast.show(message, {
+        duration: 3000,
+        position: 30,
+        backgroundColor: COLORS.RED_200,
+        textColor: COLORS.WHITE
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -39,22 +95,83 @@ export function SignUp() {
         <Header title="Sign up" showBackButton onPress={handleGoBack} />
       </ContentHeader>
       <ContentInputs>
-        <CustomInput
-          label="Name"
-          keyboardType="default"
-          autoCapitalize="words"
-          showIcon
+        <Controller
+          control={control}
+          name="displayName"
+          render={({ field: { onChange, value } }) => (
+            <CustomInput
+              label="Name"
+              keyboardType="default"
+              autoCapitalize="words"
+              showIcon
+              formSubmitted={isSubmitSuccessful}
+              onChangeText={onChange}
+              value={value}
+              errorMessage={errors.displayName?.message}
+            />
+          )}
         />
-        <CustomInput
-          label="Email"
-          keyboardType="email-address"
-          autoCapitalize="none"
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, value } }) => (
+            <CustomInput
+              label="Email"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              showIcon
+              formSubmitted={isSubmitSuccessful}
+              onChangeText={onChange}
+              value={value}
+              errorMessage={errors.email?.message}
+            />
+          )}
         />
-        <CustomInput label="Password" secureTextEntry={true} />
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, value } }) => (
+            <CustomInput
+              label="Password"
+              secureTextEntry
+              showIcon
+              formSubmitted={isSubmitSuccessful}
+              onChangeText={onChange}
+              value={value}
+              errorMessage={errors.password?.message}
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="password_confirm"
+          render={({ field: { onChange, value } }) => (
+            <CustomInput
+              label="Confirm password"
+              secureTextEntry
+              showIcon
+              formSubmitted={isSubmitSuccessful}
+              onChangeText={onChange}
+              value={value}
+              returnKeyType="none"
+              errorMessage={errors.password_confirm?.message}
+            />
+          )}
+        />
       </ContentInputs>
       <ContentButtons>
-        <TouchableText label="Already have an account?" icon />
-        <CustomButton title="SIGN UP" />
+        <TouchableText
+          label="Already have an account?"
+          icon
+          source={require("@assets/arrow-right.png")}
+        />
+        <CustomButton
+          title="SIGN UP"
+          onPress={handleSubmit(handleCreateAccount)}
+          isLoading={isLoading}
+          onPressOut={() => setIsSubmitSuccessful(true)}
+        />
       </ContentButtons>
       <ContentFooter>
         <Title>Or sign up with social account</Title>
