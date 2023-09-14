@@ -1,7 +1,7 @@
 import {
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
-  signOut,
   updateProfile
 } from "firebase/auth";
 import { auth } from "@services/FirebaseConfig";
@@ -33,6 +33,14 @@ export async function LoginUser(email: string, password: string) {
     const user = await signInWithEmailAndPassword(auth, email, password);
 
     return user;
+  } catch (error: any) {
+    throw new AppError(error.message);
+  }
+}
+
+export async function SendEmailForgotPassword(email: string) {
+  try {
+    await sendPasswordResetEmail(auth, email);
   } catch (error: any) {
     throw new AppError(error.message);
   }

@@ -15,6 +15,7 @@ import { useTheme } from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 
 import { AuthProps } from "@routes/auth.routes";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
   Container,
@@ -29,9 +30,11 @@ import {
 } from "./styles";
 import { LoginUser } from "@requests/index";
 import { FormLoginDTO } from "@dtos/FormLoginDTO";
+import { loginSchema } from "@utils/validation/schemaLogin";
 
 export function Login() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
 
   const navigation = useNavigation<AuthProps>();
   const { COLORS } = useTheme();
@@ -41,18 +44,22 @@ export function Login() {
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm<FormLoginDTO>();
+  } = useForm<FormLoginDTO>({
+    resolver: yupResolver(loginSchema)
+  });
 
   async function handleLogin({ email, password }: FormLoginDTO) {
     try {
       setIsLoading(true);
 
-      await LoginUser(email, password);
+      const response = await LoginUser(email, password);
+
+      console.log(response, "response");
 
       reset({ email: "", password: "" });
     } catch (error: any) {
       const message =
-        "Erro ao fazer login, verifique seu e-mail e senha." || error.message;
+        "Error logging in, check your email and password" || error.message;
 
       setIsLoading(false);
 
@@ -68,7 +75,7 @@ export function Login() {
   }
 
   function handleForgotPassword() {
-    console.log("Forgot password");
+    navigation.navigate("forgotPassword");
   }
 
   function handleCreateAccount() {
@@ -86,13 +93,14 @@ export function Login() {
         <Controller
           control={control}
           name="email"
-          rules={{ required: "Informe o e-mail" }}
           render={({ field: { onChange, value } }) => (
             <CustomInput
               label="Email"
               keyboardType="email-address"
               autoCapitalize="none"
               returnKeyType="done"
+              formSubmitted={isSubmitSuccessful}
+              showIcon
               value={value}
               onChangeText={onChange}
               errorMessage={errors.email?.message}
@@ -103,13 +111,14 @@ export function Login() {
         <Controller
           control={control}
           name="password"
-          rules={{ required: "Informe a senha" }}
           render={({ field: { onChange, value } }) => (
             <CustomInput
               label="Password"
               secureTextEntry
               returnKeyType="send"
               value={value}
+              formSubmitted={isSubmitSuccessful}
+              showIcon
               onChangeText={onChange}
               errorMessage={errors.password?.message}
             />
@@ -129,6 +138,7 @@ export function Login() {
             title="LOGIN"
             onPress={handleSubmit(handleLogin)}
             isLoading={isLoading}
+            onPressOut={() => setIsSubmitSuccessful(true)}
           />
         </ContentButtonLogin>
 

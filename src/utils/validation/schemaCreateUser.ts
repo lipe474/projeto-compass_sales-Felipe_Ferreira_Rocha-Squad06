@@ -1,17 +1,17 @@
 import * as yup from "yup";
 
 export const signUpSchema = yup.object({
-  displayName: yup.string().required("Informe o nome."),
+  displayName: yup.string().required("Provide an name"),
   email: yup
     .string()
-    .required("Informe o e-mail.")
-    .email("Digite um e-mail válido."),
+    .required("Provide an email")
+    .email("Not a valid email address. Should be your@email.com"),
   password: yup
     .string()
-    .required("Informe a senha.")
-    .min(4, "A senha deve ter pelo menos 4 dígitos."),
+    .required("Provide an password")
+    .min(4, "Your password should be at least 4 characters long"),
   password_confirm: yup
     .string()
-    .required("Confirme sua senha.")
-    .oneOf([yup.ref("password"), ""], "As senhas não coincidem.")
+    .required("Confirm your password")
+    .oneOf([yup.ref("password"), ""], "Passwords must match")
 });

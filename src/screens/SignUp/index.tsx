@@ -30,8 +30,6 @@ import { UserDTO } from "@dtos/UserDTO";
 import Toast from "react-native-root-toast";
 
 import { useTheme } from "styled-components/native";
-import { updateCurrentUser, updateProfile } from "firebase/auth";
-import { auth } from "@services/FirebaseConfig";
 
 export function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
@@ -52,6 +50,10 @@ export function SignUp() {
     navigation.goBack();
   }
 
+  function handleGoToLogin() {
+    navigation.navigate("login");
+  }
+
   async function handleCreateAccount({
     displayName,
     email,
@@ -61,7 +63,7 @@ export function SignUp() {
       setIsLoading(true);
       await CreateUser({ displayName, email, password });
 
-      Toast.show("Usuário criado com sucesso.", {
+      Toast.show("User created successfully.", {
         duration: 3000,
         position: 30,
         backgroundColor: COLORS.GREEN,
@@ -69,11 +71,10 @@ export function SignUp() {
       });
 
       navigation.navigate("login");
-      setIsSubmitSuccessful(true);
       setIsLoading(false);
     } catch (error: any) {
       const message =
-        "Erro ao criar conta, verifique os campos de email e senha e tente novamente." ||
+        "Error creating account, check email and password fields and try again" ||
         error.message;
 
       setIsLoading(false);
@@ -94,6 +95,7 @@ export function SignUp() {
       <ContentHeader>
         <Header title="Sign up" showBackButton onPress={handleGoBack} />
       </ContentHeader>
+
       <ContentInputs>
         <Controller
           control={control}
@@ -111,6 +113,7 @@ export function SignUp() {
             />
           )}
         />
+
         <Controller
           control={control}
           name="email"
@@ -127,6 +130,7 @@ export function SignUp() {
             />
           )}
         />
+
         <Controller
           control={control}
           name="password"
@@ -160,12 +164,15 @@ export function SignUp() {
           )}
         />
       </ContentInputs>
+
       <ContentButtons>
         <TouchableText
           label="Already have an account?"
           icon
           source={require("@assets/arrow-right.png")}
+          onPress={handleGoToLogin}
         />
+
         <CustomButton
           title="SIGN UP"
           onPress={handleSubmit(handleCreateAccount)}
@@ -173,8 +180,10 @@ export function SignUp() {
           onPressOut={() => setIsSubmitSuccessful(true)}
         />
       </ContentButtons>
+
       <ContentFooter>
         <Title>Or sign up with social account</Title>
+
         <ContentFooterButtons>
           <FooterButtons source={require("@assets/google.png")} />
           <FooterButtons source={require("@assets/facebook.png")} />

@@ -50,7 +50,7 @@ export const SuccessIcon = styled(Check).attrs(({ theme }) => ({
 `;
 
 export const ErrorIcon = styled(X).attrs(({ theme }) => ({
-  size: theme.FONT_SIZE.LG,
+  size: theme.FONT_SIZE.XMD,
   color: theme.COLORS.RED_100,
   weight: "bold"
 }))`
@@ -62,6 +62,7 @@ export const ErrorText = styled.Text`
   color: ${({ theme }) => theme.COLORS.RED_100};
   font-size: ${({ theme }) => theme.FONT_SIZE.XS}px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
-  margin-bottom: 5px;
+  margin-bottom: 2px;
+  bottom: 6px;
   text-align: center;
 `;

@@ -13,7 +13,7 @@ export const ContentHeader = styled.View`
 
 export const ContentInputs = styled.View`
   min-height: 280px;
-  max-height: 350px;
+  max-height: 340px;
   justify-content: space-between;
   margin-left: 16px;
   margin-right: 16px;

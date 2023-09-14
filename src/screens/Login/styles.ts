@@ -12,11 +12,11 @@ export const ContentHeader = styled.View`
 `;
 
 export const ContentInputs = styled.View`
-  height: 136px;
+  min-height: 136px;
+  max-height: 172px;
   justify-content: space-between;
   margin-left: 16px;
   margin-right: 16px;
-  margin-bottom: 8px;
 `;
 
 export const ContentButtons = styled.View`

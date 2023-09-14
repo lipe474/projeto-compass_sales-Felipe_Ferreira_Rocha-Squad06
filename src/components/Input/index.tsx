@@ -29,7 +29,7 @@ export function CustomInput({
   formSubmitted,
   ...rest
 }: Props) {
-  const { FONT_SIZE, FONT_FAMILY } = useTheme();
+  const { COLORS, FONT_SIZE, FONT_FAMILY } = useTheme();
 
   const [isFocused, setIsFocused] = useState(false);
 
@@ -42,13 +42,18 @@ export function CustomInput({
     top: isFocused || hasValue ? 10 : 0
   };
 
+  const labelStyleError = {
+    color: errorMessage ? COLORS.RED_100 : COLORS.GRAY_300,
+    ...labelStyle
+  };
+
   return (
     <>
       <Container>
         {errorMessage ? (
           <InputContainer
             label={label}
-            labelStyle={labelStyle}
+            labelStyle={labelStyleError}
             style={{
               borderColor: "red"
             }}

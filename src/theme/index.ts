@@ -23,6 +23,7 @@ export default {
     XS: 11,
     SM: 14,
     MD: 16,
+    XMD: 20,
     LG: 24,
     XL: 34,
     XXL: 48
