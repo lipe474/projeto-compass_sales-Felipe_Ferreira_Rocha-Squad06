@@ -3,11 +3,12 @@ import { ContainerIcon, IconImage } from "./styles";
 
 type Props = {
   source: ImageSourcePropType;
+  onPress?: () => void;
 };
 
-export function FooterButtons({ source }: Props) {
+export function FooterButtons({ source, onPress }: Props) {
   return (
-    <ContainerIcon>
+    <ContainerIcon onPress={onPress}>
       <IconImage source={source} />
     </ContainerIcon>
   );

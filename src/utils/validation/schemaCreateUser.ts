@@ -9,7 +9,7 @@ export const signUpSchema = yup.object({
   password: yup
     .string()
     .required("Provide an password")
-    .min(4, "Your password should be at least 4 characters long"),
+    .min(6, "Your password should be at least 6 characters long"),
   password_confirm: yup
     .string()
     .required("Confirm your password")

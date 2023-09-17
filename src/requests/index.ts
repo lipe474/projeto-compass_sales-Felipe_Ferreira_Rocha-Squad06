@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile
 } from "firebase/auth";
 import { auth } from "@services/FirebaseConfig";
@@ -13,7 +14,7 @@ export async function CreateUser({ displayName, email, password }: UserDTO) {
     const response = await createUserWithEmailAndPassword(
       auth,
       email,
-      password
+      password!
     );
 
     if (response.user && auth.currentUser) {
@@ -33,6 +34,14 @@ export async function LoginUser(email: string, password: string) {
     const user = await signInWithEmailAndPassword(auth, email, password);
 
     return user;
+  } catch (error: any) {
+    throw new AppError(error.message);
+  }
+}
+
+export async function LogoutUser() {
+  try {
+    await signOut(auth);
   } catch (error: any) {
     throw new AppError(error.message);
   }

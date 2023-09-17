@@ -1,4 +1,3 @@
-import { StatusBar } from "react-native";
 import { ThemeProvider } from "styled-components";
 import {
   useFonts,
@@ -13,7 +12,6 @@ import theme from "./src/theme";
 import { Loading } from "@components/Loading";
 
 import { Routes } from "@routes/index";
-import { useNavigationState } from "@react-navigation/native";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -25,14 +23,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <>
-        {/* <StatusBar
-          barStyle="dark-content"
-          backgroundColor="transparent"
-          translucent
-        /> */}
-        {fontsLoaded ? <Routes /> : <Loading />}
-      </>
+      {fontsLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   );
 }

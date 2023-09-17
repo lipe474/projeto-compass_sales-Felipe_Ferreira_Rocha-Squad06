@@ -52,9 +52,7 @@ export function Login() {
     try {
       setIsLoading(true);
 
-      const response = await LoginUser(email, password);
-
-      console.log(response, "response");
+      await LoginUser(email, password);
 
       reset({ email: "", password: "" });
     } catch (error: any) {
@@ -79,7 +77,7 @@ export function Login() {
     reset({ email: "", password: "" });
   }
 
-  function handleCreateAccount() {
+  function handleNavigateToCreateAccount() {
     navigation.navigate("signUp");
     reset({ email: "", password: "" });
   }
@@ -148,7 +146,7 @@ export function Login() {
           <Title>Not registered? </Title>
           <TouchableText
             label="Create your account here!"
-            onPress={handleCreateAccount}
+            onPress={handleNavigateToCreateAccount}
           />
         </ContentRegister>
       </ContentButtons>

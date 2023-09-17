@@ -1,9 +1,10 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
+import { SignOut } from "phosphor-react-native";
 
 export const Container = styled(SafeAreaView)`
   flex: 1;
-  background-color: ${({ theme }) => theme.COLORS.GRAY_300};
+  background-color: ${({ theme }) => theme.COLORS.BLACK_900};
 `;
 
 export const ContainerScroll = styled.ScrollView`
@@ -18,11 +19,23 @@ export const ContainerHeaderImage = styled.ImageBackground`
   justify-content: space-between;
 `;
 
+export const ContainerHeader = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 16px;
+`;
+
 export const GreetingText = styled.Text`
   font-size: ${({ theme }) => theme.FONT_SIZE.MD}px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   color: ${({ theme }) => theme.COLORS.WHITE};
 `;
+
+export const LogoutIcon = styled(SignOut).attrs(({ theme }) => ({
+  size: theme.FONT_SIZE.LG,
+  color: theme.COLORS.WHITE,
+  weight: "bold"
+}))``;
 
 export const ContainerLowerHeader = styled.View`
   min-height: 172px;

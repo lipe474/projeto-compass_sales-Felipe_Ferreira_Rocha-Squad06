@@ -1,6 +1,7 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+
+import { getReactNativePersistence, initializeAuth } from "firebase/auth";
+import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyByaFecCvzaXuHf_tre9L_ex4Ul8RzPgJc",
@@ -12,7 +13,10 @@ const firebaseConfig = {
   measurementId: "G-035BQDX3E0"
 };
 
-export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-auth.languageCode = "pt-br";
-export const provider = new GoogleAuthProvider();
+export const app = initializeApp(firebaseConfig, {
+  name: "CompassSales"
+});
+
+export const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+});

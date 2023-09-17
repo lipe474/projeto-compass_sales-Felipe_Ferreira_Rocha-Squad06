@@ -73,9 +73,14 @@ export function SignUp() {
       navigation.navigate("login");
       setIsLoading(false);
     } catch (error: any) {
-      const message =
-        "Error creating account, check email and password fields and try again" ||
-        error.message;
+      let message = error.message;
+
+      if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+        message = "Email already in use, try another one";
+      } else {
+        message =
+          "Error creating account, check email and password fields and try again";
+      }
 
       setIsLoading(false);
 
