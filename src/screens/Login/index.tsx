@@ -76,6 +76,7 @@ export function Login() {
 
   function handleForgotPassword() {
     navigation.navigate("forgotPassword");
+    reset({ email: "", password: "" });
   }
 
   function handleCreateAccount() {
@@ -115,7 +116,7 @@ export function Login() {
             <CustomInput
               label="Password"
               secureTextEntry
-              returnKeyType="send"
+              returnKeyType="none"
               value={value}
               formSubmitted={isSubmitSuccessful}
               showIcon
@@ -132,13 +133,14 @@ export function Login() {
             label="Forgot your password?"
             icon
             onPress={handleForgotPassword}
-            source={require("@assets/arrow-right.png")}
+            source={require("@assets/icons/arrow-right.png")}
           />
           <CustomButton
             title="LOGIN"
             onPress={handleSubmit(handleLogin)}
             isLoading={isLoading}
             onPressOut={() => setIsSubmitSuccessful(true)}
+            height={48}
           />
         </ContentButtonLogin>
 
@@ -155,8 +157,8 @@ export function Login() {
         <Title>Or login with social account</Title>
 
         <ContentFooterButtons>
-          <FooterButtons source={require("@assets/google.png")} />
-          <FooterButtons source={require("@assets/facebook.png")} />
+          <FooterButtons source={require("@assets/icons/google.png")} />
+          <FooterButtons source={require("@assets/icons/facebook.png")} />
         </ContentFooterButtons>
       </ContentFooter>
     </Container>

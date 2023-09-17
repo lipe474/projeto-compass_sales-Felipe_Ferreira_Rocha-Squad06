@@ -7,6 +7,7 @@ export default {
 
     GREEN: "#2AA952",
 
+    BLACK_900: "#000000",
     BLACK_700: "#222222",
     BLACK_600: "#2D2D2D",
 

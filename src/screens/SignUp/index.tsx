@@ -169,7 +169,7 @@ export function SignUp() {
         <TouchableText
           label="Already have an account?"
           icon
-          source={require("@assets/arrow-right.png")}
+          source={require("@assets/icons/arrow-right.png")}
           onPress={handleGoToLogin}
         />
 
@@ -178,6 +178,7 @@ export function SignUp() {
           onPress={handleSubmit(handleCreateAccount)}
           isLoading={isLoading}
           onPressOut={() => setIsSubmitSuccessful(true)}
+          height={48}
         />
       </ContentButtons>
 
@@ -185,8 +186,8 @@ export function SignUp() {
         <Title>Or sign up with social account</Title>
 
         <ContentFooterButtons>
-          <FooterButtons source={require("@assets/google.png")} />
-          <FooterButtons source={require("@assets/facebook.png")} />
+          <FooterButtons source={require("@assets/icons/google.png")} />
+          <FooterButtons source={require("@assets/icons/facebook.png")} />
         </ContentFooterButtons>
       </ContentFooter>
     </Container>

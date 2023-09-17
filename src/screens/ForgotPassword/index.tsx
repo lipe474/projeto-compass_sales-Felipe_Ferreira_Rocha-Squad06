@@ -56,7 +56,8 @@ export function ForgotPassword() {
       setIsLoading(false);
     } catch (error: any) {
       const message =
-        "Error sending password reset email, please try again" || error.message;
+        "Error sending password reset email. Check your email and try again" ||
+        error.message;
 
       setIsLoading(false);
 
@@ -112,6 +113,7 @@ export function ForgotPassword() {
           onPress={handleSubmit(handleSendEmailForgotPassword)}
           isLoading={isLoading}
           onPressOut={() => setIsSubmitSuccessful(true)}
+          height={48}
         />
       </ContentButtons>
     </Container>
