@@ -53,7 +53,5 @@ The **most relevant dependencies** I used during the development of the applicat
 - In the "***Scan QR code***" option you can scan the QR code on the terminal.
 
 
-```
 > [!NOTE]
 > The Firebase configuration is in "src/services/FirebaseConfig.ts". I'm leaving my Firebase project data to facilitate evaluation, as this repository is only intended for Compass UOL SP instructors. If you want to use your own data, create a project in your Firebase account and update it to your data at [Console Firebase](https://firebase.google.com/?hl=pt).
-```
