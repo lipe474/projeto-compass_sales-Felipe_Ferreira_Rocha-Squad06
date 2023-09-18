@@ -1,5 +1,4 @@
 import styled from "styled-components/native";
-import { ArrowRight } from "phosphor-react-native";
 
 export const Container = styled.TouchableOpacity`
   height: 24px;
@@ -23,9 +22,3 @@ export const Icon = styled.Image`
   width: 24px;
   height: 24px;
 `;
-
-// export const Icon = styled(ArrowRight).attrs(({ theme }) => ({
-//   size: theme.FONT_SIZE.LG,
-//   color: theme.COLORS.RED_200,
-//   weight: "bold"
-// }))``;

@@ -76,7 +76,6 @@ export function Login() {
 
   function handleForgotPassword() {
     navigation.navigate("forgotPassword");
-    reset({ email: "", password: "" });
   }
 
   function handleNavigateToCreateAccount() {
