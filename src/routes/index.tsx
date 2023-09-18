@@ -8,7 +8,7 @@ import { Loading } from "@components/Loading";
 import { useTheme } from "styled-components/native";
 
 export function Routes() {
-  const { user, isLoading, isNewUser } = useAuth();
+  const { user, isLoading } = useAuth();
   const { COLORS } = useTheme();
 
   const barStyle = user ? "light-content" : "dark-content";
@@ -25,7 +25,7 @@ export function Routes() {
         translucent
       />
       <NavigationContainer>
-        {user ? isNewUser ? <AuthRoutes /> : <AppRoutes /> : <AuthRoutes />}
+        {user?.displayName ? <AppRoutes /> : <AuthRoutes />}
       </NavigationContainer>
     </View>
   );

@@ -20,6 +20,8 @@ export async function CreateUser({ displayName, email, password }: UserDTO) {
     if (response.user && auth.currentUser) {
       await updateProfile(auth.currentUser, {
         displayName: displayName
+      }).then(() => {
+        auth.signOut();
       });
     }
   } catch (error: any) {

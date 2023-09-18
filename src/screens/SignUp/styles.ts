@@ -27,6 +27,13 @@ export const ContentButtons = styled.View`
   margin-right: 16px;
 `;
 
+export const ContentReturnLogin = styled.View`
+  width: 190px;
+  margin-left: auto;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const ContentFooter = styled.View`
   height: 96px;
   justify-content: flex-end;

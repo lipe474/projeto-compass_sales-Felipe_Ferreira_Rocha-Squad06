@@ -63,6 +63,7 @@ export const ErrorText = styled.Text`
   font-size: ${({ theme }) => theme.FONT_SIZE.XS}px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
   margin-bottom: 2px;
+  margin-left: 3px;
   bottom: 6px;
-  text-align: center;
+  text-align: left;
 `;

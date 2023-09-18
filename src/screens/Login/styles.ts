@@ -31,6 +31,13 @@ export const ContentButtonLogin = styled.View`
   justify-content: space-between;
 `;
 
+export const ContentForgotPassword = styled.View`
+  width: 175px;
+  margin-left: auto;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const ContentRegister = styled.View`
   height: 20px;
   justify-content: center;

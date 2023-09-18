@@ -6,6 +6,7 @@ import {
   ContentFooterButtons,
   ContentHeader,
   ContentInputs,
+  ContentReturnLogin,
   Title
 } from "./styles";
 
@@ -62,7 +63,6 @@ export function SignUp() {
     try {
       setIsLoading(true);
       await CreateUser({ displayName, email, password });
-      await LogoutUser();
 
       navigation.navigate("login");
 
@@ -173,12 +173,14 @@ export function SignUp() {
       </ContentInputs>
 
       <ContentButtons>
-        <TouchableText
-          label="Already have an account?"
-          icon
-          source={require("@assets/icons/arrow-right.png")}
-          onPress={handleGoToLogin}
-        />
+        <ContentReturnLogin>
+          <TouchableText
+            label="Already have an account?"
+            icon
+            source={require("@assets/icons/arrow-right.png")}
+            onPress={handleGoToLogin}
+          />
+        </ContentReturnLogin>
 
         <CustomButton
           title="SIGN UP"

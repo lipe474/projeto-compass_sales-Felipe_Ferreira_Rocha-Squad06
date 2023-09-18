@@ -26,7 +26,8 @@ import {
   Title,
   ContentFooterButtons,
   ContentRegister,
-  ContentButtonLogin
+  ContentButtonLogin,
+  ContentForgotPassword
 } from "./styles";
 import { LoginUser } from "@requests/index";
 import { FormLoginDTO } from "@dtos/FormLoginDTO";
@@ -34,6 +35,8 @@ import { loginSchema } from "@utils/validation/schemaLogin";
 
 export function Login() {
   const [isLoading, setIsLoading] = useState(false);
+  const [emailErrorMessage, setEmailErrorMessage] = useState(undefined);
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
 
   const navigation = useNavigation<AuthProps>();
@@ -57,18 +60,21 @@ export function Login() {
       reset({ email: "", password: "" });
 
       setIsLoading(false);
+      setIsSubmitSuccessful(true);
     } catch (error: any) {
-      const message =
-        "Error logging in, check your email and password" || error.message;
+      let message = error.message;
+
+      if (error.message === "Firebase: Error (auth/user-not-found).") {
+        message = "This email is not registered";
+        setEmailErrorMessage(message);
+      } else if (error.message === "Firebase: Error (auth/wrong-password).") {
+        message = "Your password is incorrect";
+        setPasswordErrorMessage(message);
+      } else {
+        message = "Error logging in, check your email and password";
+      }
 
       setIsLoading(false);
-
-      Toast.show(message, {
-        duration: 3000,
-        position: 30,
-        backgroundColor: COLORS.RED_200,
-        textColor: COLORS.WHITE
-      });
     } finally {
       setIsLoading(false);
     }
@@ -76,10 +82,15 @@ export function Login() {
 
   function handleForgotPassword() {
     navigation.navigate("forgotPassword");
+    setEmailErrorMessage(undefined);
+    setPasswordErrorMessage("");
+    reset({ email: "", password: "" });
   }
 
   function handleNavigateToCreateAccount() {
     navigation.navigate("signUp");
+    setEmailErrorMessage(undefined);
+    setPasswordErrorMessage("");
     reset({ email: "", password: "" });
   }
 
@@ -103,7 +114,16 @@ export function Login() {
               showIcon
               value={value}
               onChangeText={onChange}
-              errorMessage={errors.email?.message}
+              onChange={() => {
+                errors.email?.message ?? setEmailErrorMessage(undefined);
+              }}
+              errorMessage={
+                errors.email?.message
+                  ? errors.email?.message
+                  : emailErrorMessage
+                  ? emailErrorMessage
+                  : ""
+              }
             />
           )}
         />
@@ -120,7 +140,16 @@ export function Login() {
               formSubmitted={isSubmitSuccessful}
               showIcon
               onChangeText={onChange}
-              errorMessage={errors.password?.message}
+              onChange={() => {
+                errors.password?.message ?? setPasswordErrorMessage("");
+              }}
+              errorMessage={
+                errors.password?.message
+                  ? errors.password?.message
+                  : passwordErrorMessage
+                  ? passwordErrorMessage
+                  : ""
+              }
             />
           )}
         />
@@ -128,12 +157,14 @@ export function Login() {
 
       <ContentButtons>
         <ContentButtonLogin>
-          <TouchableText
-            label="Forgot your password?"
-            icon
-            onPress={handleForgotPassword}
-            source={require("@assets/icons/arrow-right.png")}
-          />
+          <ContentForgotPassword>
+            <TouchableText
+              label="Forgot your password?"
+              icon
+              onPress={handleForgotPassword}
+              source={require("@assets/icons/arrow-right.png")}
+            />
+          </ContentForgotPassword>
           <CustomButton
             title="LOGIN"
             onPress={handleSubmit(handleLogin)}
