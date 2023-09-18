@@ -54,4 +54,4 @@ The **most relevant dependencies** I used during the development of the applicat
 
 
 > [!NOTE]
-> The Firebase configuration is in "***src/services/FirebaseConfig.ts***". I'm leaving the configuration data for my Firebase project to facilitate evaluation, as this repository is only intended for Compass UOL SP instructors. If you want to use your own data, create a project in your Firebase account and update the value of `const firebaseConfig = { ...any code }` with your data from the [Console Firebase](https://firebase.google.com/?hl=pt).
+> The Firebase configuration is in "***src/services/FirebaseConfig.ts***". I'm leaving the configuration data for my Firebase project to *facilitate evaluation*, as this repository is only intended for Compass UOL SP instructors. If you want to use your own data, create a project in your Firebase account and update the value of `const firebaseConfig = { ...any code }` with your data from the [Console Firebase](https://firebase.google.com/?hl=pt).
