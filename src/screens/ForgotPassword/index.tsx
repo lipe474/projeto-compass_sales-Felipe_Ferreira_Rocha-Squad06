@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 
-import { useNavigation } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
+
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from "react-hook-form";
+
+import { SendEmailForgotPassword } from "@requests/index";
 import { forgotPasswordSchema } from "@utils/validation/schemaForgotPassword";
 
 import { AuthProps } from "@routes/auth.routes";
 
+import Toast from "react-native-root-toast";
 import { Header } from "@components/Header";
 import { CustomInput } from "@components/Input";
+import { CustomButton } from "@components/Button";
 
 import {
   Container,
@@ -18,10 +24,6 @@ import {
   ContentText,
   Subtitle
 } from "./styles";
-import { CustomButton } from "@components/Button";
-import { SendEmailForgotPassword } from "@requests/index";
-import Toast from "react-native-root-toast";
-import { useTheme } from "styled-components/native";
 
 type ForgotPasswordProps = {
   email: string;

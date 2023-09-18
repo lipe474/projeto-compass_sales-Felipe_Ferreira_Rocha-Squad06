@@ -10,9 +10,6 @@
       "@components/*": [
         "./src/components/*"
       ],
-      "@contexts/*": [
-        "./src/contexts/*"
-      ],
       "@dtos/*": [
         "./src/dtos/*"
       ],
@@ -30,9 +27,6 @@
       ],
       "@services/*": [
         "./src/services/*"
-      ],
-      "@storage/*": [
-        "./src/storage/*"
       ],
       "@utils/*": [
         "./src/utils/*"

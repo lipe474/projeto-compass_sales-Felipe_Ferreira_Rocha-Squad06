@@ -1,4 +1,25 @@
 import React, { useState } from "react";
+
+import { useTheme } from "styled-components/native";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigation } from "@react-navigation/native";
+import { Controller, useForm } from "react-hook-form";
+
+import { CreateUser } from "@requests/index";
+import { signUpSchema } from "@utils/validation/schemaCreateUser";
+import { UserDTO } from "@dtos/UserDTO";
+import { FormCreateUserDTO } from "@dtos/FormCreateUserDTO";
+
+import { AuthProps } from "@routes/auth.routes";
+
+import Toast from "react-native-root-toast";
+import { Header } from "@components/Header";
+import { CustomInput } from "@components/Input";
+import { TouchableText } from "@components/TouchableText";
+import { CustomButton } from "@components/Button";
+import { FooterButtons } from "@components/FooterButtons";
+
 import {
   Container,
   ContentButtons,
@@ -9,28 +30,6 @@ import {
   ContentReturnLogin,
   Title
 } from "./styles";
-
-import { useNavigation } from "@react-navigation/native";
-
-import { AuthProps } from "@routes/auth.routes";
-
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpSchema } from "@utils/validation/schemaCreateUser";
-import { CreateUser, LogoutUser } from "@requests/index";
-
-import { CustomInput } from "@components/Input";
-import { TouchableText } from "@components/TouchableText";
-import { CustomButton } from "@components/Button";
-import { FooterButtons } from "@components/FooterButtons";
-import { Header } from "@components/Header";
-
-import { FormCreateUserDTO } from "@dtos/FormCreateUserDTO";
-import { UserDTO } from "@dtos/UserDTO";
-
-import Toast from "react-native-root-toast";
-
-import { useTheme } from "styled-components/native";
 
 export function SignUp() {
   const [isLoading, setIsLoading] = useState(false);

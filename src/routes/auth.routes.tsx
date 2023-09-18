@@ -2,6 +2,7 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationProp
 } from "@react-navigation/native-stack";
+
 import { ForgotPassword } from "@screens/ForgotPassword";
 import { Login } from "@screens/Login";
 import { SignUp } from "@screens/SignUp";

@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 
-import Toast from "react-native-root-toast";
+import { useTheme } from "styled-components/native";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from "react-hook-form";
+
+import { LoginUser } from "@requests/index";
+import { loginSchema } from "@utils/validation/schemaLogin";
+import { FormLoginDTO } from "@dtos/FormLoginDTO";
+
+import { AuthProps } from "@routes/auth.routes";
 
 import { Header } from "@components/Header";
 import { CustomInput } from "@components/Input";
 import { CustomButton } from "@components/Button";
 import { TouchableText } from "@components/TouchableText";
 import { FooterButtons } from "@components/FooterButtons";
-
-import { useTheme } from "styled-components/native";
-
-import { useNavigation } from "@react-navigation/native";
-
-import { AuthProps } from "@routes/auth.routes";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
   Container,
@@ -29,9 +30,6 @@ import {
   ContentButtonLogin,
   ContentForgotPassword
 } from "./styles";
-import { LoginUser } from "@requests/index";
-import { FormLoginDTO } from "@dtos/FormLoginDTO";
-import { loginSchema } from "@utils/validation/schemaLogin";
 
 export function Login() {
   const [isLoading, setIsLoading] = useState(false);

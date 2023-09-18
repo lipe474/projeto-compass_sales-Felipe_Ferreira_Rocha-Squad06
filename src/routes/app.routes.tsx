@@ -1,8 +1,4 @@
-import { Platform } from "react-native";
-import {
-  createBottomTabNavigator,
-  BottomTabNavigationProp
-} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeSvg from "@assets/icons/home.svg";
 import ShopSvg from "@assets/icons/cart-shop.svg";
@@ -13,17 +9,7 @@ import ProfileSvg from "@assets/icons/profile.svg";
 import { Home } from "@screens/Home";
 import { useTheme } from "styled-components/native";
 
-type AppRoutes = {
-  home: undefined;
-  shop: undefined;
-  bag: undefined;
-  favorites: undefined;
-  profile: undefined;
-};
-
-export type AppProps = BottomTabNavigationProp<AppRoutes>;
-
-const { Navigator, Screen } = createBottomTabNavigator<AppRoutes>();
+const { Navigator, Screen } = createBottomTabNavigator();
 
 export function AppRoutes() {
   const { COLORS, FONT_FAMILY, FONT_SIZE } = useTheme();
@@ -39,7 +25,7 @@ export function AppRoutes() {
         tabBarInactiveTintColor: COLORS.GRAY_300,
         tabBarStyle: {
           backgroundColor: COLORS.WHITE,
-          height: Platform.OS === "android" ? "auto" : 96,
+          height: "auto",
           paddingTop: 24,
           paddingBottom: 5,
           position: "absolute",

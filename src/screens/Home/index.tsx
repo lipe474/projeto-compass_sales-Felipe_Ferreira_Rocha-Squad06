@@ -1,4 +1,16 @@
+import React from "react";
+
 import { FlatList, TouchableOpacity } from "react-native";
+import { useTheme } from "styled-components/native";
+
+import { useAuth } from "@hooks/useAuth";
+
+import { LogoutUser, cardsData } from "@requests/index";
+
+import Toast from "react-native-root-toast";
+import { ProductCard } from "@components/ProductCard";
+import { CustomButton } from "@components/Button";
+
 import {
   AppTitle,
   Container,
@@ -14,13 +26,6 @@ import {
   SectionTitle,
   SectionViewAll
 } from "./styles";
-import { CustomButton } from "@components/Button";
-import { ProductCard } from "@components/ProductCard";
-import { useAuth } from "@hooks/useAuth";
-import { LogoutUser, cardsData } from "@requests/index";
-
-import Toast from "react-native-root-toast";
-import { useTheme } from "styled-components/native";
 
 export function Home() {
   const { user } = useAuth();

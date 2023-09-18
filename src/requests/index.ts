@@ -5,6 +5,7 @@ import {
   signOut,
   updateProfile
 } from "firebase/auth";
+
 import { auth } from "@services/FirebaseConfig";
 import { UserDTO } from "@dtos/UserDTO";
 import { AppError } from "@utils/AppError";
