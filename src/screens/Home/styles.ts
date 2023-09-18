@@ -31,12 +31,6 @@ export const GreetingText = styled.Text`
   color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 
-export const LogoutIcon = styled(SignOut).attrs(({ theme }) => ({
-  size: theme.FONT_SIZE.LG,
-  color: theme.COLORS.WHITE,
-  weight: "bold"
-}))``;
-
 export const ContainerLowerHeader = styled.View`
   min-height: 172px;
   max-height: 172px;
@@ -53,6 +47,7 @@ export const AppTitle = styled.Text`
 
 export const ContainerNewProducts = styled.View`
   flex: 1;
+  height: 480px;
   padding-top: 35px;
   padding-left: 14px;
   background-color: ${({ theme }) => theme.COLORS.GRAY_100};
@@ -92,3 +87,9 @@ export const Products = styled.FlatList.attrs({
 })`
   flex: 1;
 `;
+
+export const LogoutIcon = styled(SignOut).attrs(({ theme }) => ({
+  size: theme.FONT_SIZE.LG,
+  color: theme.COLORS.WHITE,
+  weight: "bold"
+}))``;

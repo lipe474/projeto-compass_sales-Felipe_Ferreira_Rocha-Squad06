@@ -17,7 +17,7 @@ import {
 import { CustomButton } from "@components/Button";
 import { ProductCard } from "@components/ProductCard";
 import { useAuth } from "@hooks/useAuth";
-import { LogoutUser } from "@requests/index";
+import { LogoutUser, cardsData } from "@requests/index";
 
 import Toast from "react-native-root-toast";
 import { useTheme } from "styled-components/native";
@@ -70,9 +70,18 @@ export function Home() {
           <SectionSubtitle>You´ve never seen it before!</SectionSubtitle>
 
           <FlatList
-            data={[1, 2, 3, 4, 5, 6]}
-            keyExtractor={(item) => String(item)}
-            renderItem={({ item }) => <ProductCard />}
+            data={cardsData}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={({ item }) => (
+              <ProductCard
+                key={item.id}
+                rating={item.rating}
+                category={item.category}
+                productName={item.productName}
+                price={item.price}
+                favorite={item.favorite}
+              />
+            )}
             horizontal
             showsHorizontalScrollIndicator={false}
           />

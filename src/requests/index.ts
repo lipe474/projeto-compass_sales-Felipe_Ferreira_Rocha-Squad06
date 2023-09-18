@@ -22,8 +22,6 @@ export async function CreateUser({ displayName, email, password }: UserDTO) {
         displayName: displayName
       });
     }
-
-    return response;
   } catch (error: any) {
     throw new AppError(error.message);
   }
@@ -54,3 +52,38 @@ export async function SendEmailForgotPassword(email: string) {
     throw new AppError(error.message);
   }
 }
+
+export const cardsData = [
+  {
+    id: 1,
+    rating: 2.5,
+    category: "Mango Boy",
+    productName: "Blouse",
+    price: 30,
+    favorite: true
+  },
+  {
+    id: 2,
+    rating: 4.0,
+    category: "Summer Fun",
+    productName: "Swimsuit",
+    price: 25,
+    favorite: false
+  },
+  {
+    id: 3,
+    rating: 3.8,
+    category: "Casual Wear",
+    productName: "Jeans",
+    price: 45,
+    favorite: false
+  },
+  {
+    id: 4,
+    rating: 4.2,
+    category: "Sports Gear",
+    productName: "Running Shoes",
+    price: 60,
+    favorite: true
+  }
+];

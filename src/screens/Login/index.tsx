@@ -55,6 +55,8 @@ export function Login() {
       await LoginUser(email, password);
 
       reset({ email: "", password: "" });
+
+      setIsLoading(false);
     } catch (error: any) {
       const message =
         "Error logging in, check your email and password" || error.message;
@@ -147,6 +149,7 @@ export function Login() {
           <TouchableText
             label="Create your account here!"
             onPress={handleNavigateToCreateAccount}
+            emphasis
           />
         </ContentRegister>
       </ContentButtons>

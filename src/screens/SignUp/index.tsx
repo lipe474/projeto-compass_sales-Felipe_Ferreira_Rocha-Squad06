@@ -16,7 +16,7 @@ import { AuthProps } from "@routes/auth.routes";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "@utils/validation/schemaCreateUser";
-import { CreateUser } from "@requests/index";
+import { CreateUser, LogoutUser } from "@requests/index";
 
 import { CustomInput } from "@components/Input";
 import { TouchableText } from "@components/TouchableText";
@@ -62,6 +62,9 @@ export function SignUp() {
     try {
       setIsLoading(true);
       await CreateUser({ displayName, email, password });
+      await LogoutUser();
+
+      navigation.navigate("login");
 
       Toast.show("User created successfully.", {
         duration: 3000,
@@ -70,7 +73,6 @@ export function SignUp() {
         textColor: COLORS.WHITE
       });
 
-      navigation.navigate("login");
       setIsLoading(false);
     } catch (error: any) {
       let message = error.message;

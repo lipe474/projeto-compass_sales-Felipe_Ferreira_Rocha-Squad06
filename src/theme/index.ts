@@ -12,6 +12,7 @@ export default {
     BLACK_600: "#2D2D2D",
 
     GRAY_300: "#9B9B9B",
+    GRAY_200: "#DADADA",
     GRAY_100: "#F9F9F9"
   },
   FONT_FAMILY: {
@@ -21,6 +22,7 @@ export default {
     BLACK: "Roboto_900Black"
   },
   FONT_SIZE: {
+    XXS: 10,
     XS: 11,
     SM: 14,
     MD: 16,
