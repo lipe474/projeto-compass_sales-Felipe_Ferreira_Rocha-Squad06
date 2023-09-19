@@ -63,14 +63,14 @@ export function SignUp() {
       setIsLoading(true);
       await CreateUser({ displayName, email, password });
 
-      navigation.navigate("login");
-
       Toast.show("User created successfully.", {
         duration: 3000,
         position: 30,
         backgroundColor: COLORS.GREEN,
         textColor: COLORS.WHITE
       });
+
+      navigation.navigate("login");
 
       setIsLoading(false);
     } catch (error: any) {

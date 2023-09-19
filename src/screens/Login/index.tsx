@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { useTheme } from "styled-components/native";
-
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from "react-hook-form";
@@ -38,7 +36,6 @@ export function Login() {
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
 
   const navigation = useNavigation<AuthProps>();
-  const { COLORS } = useTheme();
 
   const {
     control,
