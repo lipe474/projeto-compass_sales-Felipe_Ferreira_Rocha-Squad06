@@ -31,7 +31,7 @@ import {
 
 export function Login() {
   const [isLoading, setIsLoading] = useState(false);
-  const [emailErrorMessage, setEmailErrorMessage] = useState(undefined);
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
 
@@ -77,14 +77,14 @@ export function Login() {
 
   function handleForgotPassword() {
     navigation.navigate("forgotPassword");
-    setEmailErrorMessage(undefined);
+    setEmailErrorMessage("");
     setPasswordErrorMessage("");
     reset({ email: "", password: "" });
   }
 
   function handleNavigateToCreateAccount() {
     navigation.navigate("signUp");
-    setEmailErrorMessage(undefined);
+    setEmailErrorMessage("");
     setPasswordErrorMessage("");
     reset({ email: "", password: "" });
   }
@@ -110,15 +110,9 @@ export function Login() {
               value={value}
               onChangeText={onChange}
               onChange={() => {
-                errors.email?.message ?? setEmailErrorMessage(undefined);
+                errors.email?.message ?? setEmailErrorMessage("");
               }}
-              errorMessage={
-                errors.email?.message
-                  ? errors.email?.message
-                  : emailErrorMessage
-                  ? emailErrorMessage
-                  : ""
-              }
+              errorMessage={errors.email?.message ?? emailErrorMessage ?? ""}
             />
           )}
         />

@@ -31,6 +31,7 @@ type ForgotPasswordProps = {
 
 export function ForgotPassword() {
   const [isLoading, setIsLoading] = useState(false);
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
 
   const navigation = useNavigation<AuthProps>();
@@ -57,24 +58,24 @@ export function ForgotPassword() {
       });
       setIsLoading(false);
     } catch (error: any) {
-      const message =
-        "Error sending password reset email. Check your email and try again" ||
-        error.message;
+      let message = error.message;
+
+      if (error.message === "Firebase: Error (auth/user-not-found).") {
+        message = "This email is not registered";
+        setEmailErrorMessage(message);
+      } else {
+        message =
+          "Error sending password reset email. Check your email and try again";
+      }
 
       setIsLoading(false);
-
-      Toast.show(message, {
-        duration: 3000,
-        position: 30,
-        backgroundColor: COLORS.RED_200,
-        textColor: COLORS.WHITE
-      });
     } finally {
       setIsLoading(false);
     }
   }
   function handleGoBack() {
     navigation.goBack();
+    setEmailErrorMessage("");
   }
 
   return (
@@ -103,7 +104,10 @@ export function ForgotPassword() {
               formSubmitted={isSubmitSuccessful}
               onChangeText={onChange}
               value={value}
-              errorMessage={errors.email?.message}
+              onChange={() => {
+                errors.email?.message ?? setEmailErrorMessage("");
+              }}
+              errorMessage={errors.email?.message ?? emailErrorMessage ?? ""}
             />
           )}
         />

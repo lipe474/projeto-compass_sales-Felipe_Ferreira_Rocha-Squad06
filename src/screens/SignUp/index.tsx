@@ -33,6 +33,7 @@ import {
 
 export function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
 
   const navigation = useNavigation<AuthProps>();
@@ -48,10 +49,12 @@ export function SignUp() {
 
   function handleGoBack() {
     navigation.goBack();
+    setEmailErrorMessage("");
   }
 
   function handleGoToLogin() {
     navigation.navigate("login");
+    setEmailErrorMessage("");
   }
 
   async function handleCreateAccount({
@@ -78,19 +81,20 @@ export function SignUp() {
 
       if (error.message === "Firebase: Error (auth/email-already-in-use).") {
         message = "Email already in use, try another one";
+        setEmailErrorMessage(message);
       } else {
         message =
           "Error creating account, check email and password fields and try again";
+
+        Toast.show(message, {
+          duration: 3000,
+          position: 30,
+          backgroundColor: COLORS.RED_200,
+          textColor: COLORS.WHITE
+        });
       }
 
       setIsLoading(false);
-
-      Toast.show(message, {
-        duration: 3000,
-        position: 30,
-        backgroundColor: COLORS.RED_200,
-        textColor: COLORS.WHITE
-      });
     } finally {
       setIsLoading(false);
     }
@@ -132,7 +136,10 @@ export function SignUp() {
               formSubmitted={isSubmitSuccessful}
               onChangeText={onChange}
               value={value}
-              errorMessage={errors.email?.message}
+              onChange={() => {
+                errors.email?.message ?? setEmailErrorMessage("");
+              }}
+              errorMessage={errors.email?.message ?? emailErrorMessage ?? ""}
             />
           )}
         />

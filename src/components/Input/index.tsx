@@ -39,7 +39,7 @@ export function CustomInput({
     fontSize: isFocused || hasValue ? FONT_SIZE.XS : FONT_SIZE.SM,
     fontFamily:
       isFocused || hasValue ? FONT_FAMILY.REGULAR : FONT_FAMILY.MEDIUM,
-    top: isFocused || hasValue ? 10 : 0
+    top: isFocused || hasValue ? 10 : -2
   };
 
   const labelStyleError = {
