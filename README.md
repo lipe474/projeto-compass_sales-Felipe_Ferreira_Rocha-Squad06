@@ -9,7 +9,7 @@ This project is intended for the Compass UOL Scholarship Program. This challenge
  - [x] Home screen (after login)
 
 
-![](https://lh3.googleusercontent.com/drive-viewer/AITFw-wlL6VqW_wrf-nwPhXlGWFuwLZIqbDtNNeUGLWas-VteMbqmic6XFQrk80f4QMBM3NoK2B3GLZgTotS9sO3RxcZAiDB=w1920-h961)
+![](https://drive.google.com/file/d/1rWgXgSLidbtL0t4lzKwx6cE9wsSPvWB1/view)
 
 ## Requirements
 
